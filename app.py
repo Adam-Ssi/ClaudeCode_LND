@@ -233,6 +233,11 @@ def _render_markdown(text: str) -> str:
 # Routes
 # ---------------------------------------------------------------------------
 
+@app.head("/")
+async def index_head() -> Response:
+    return Response(status_code=200)
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request) -> HTMLResponse:
     return templates.TemplateResponse(
@@ -311,4 +316,4 @@ async def stcore_host_config() -> JSONResponse:
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=8501, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=8501, reload=False)
